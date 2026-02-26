@@ -191,4 +191,4 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ## 🙌 Credits
 
-Developed by **[xSmaky](https://github.com/xSmaky)**
+Developed by **[Aldayr Ruiz (xSmaky)](https://github.com/aldayrruiz)**
