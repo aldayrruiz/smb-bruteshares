@@ -34,10 +34,10 @@ BANNER = rf"""
 {CYAN}  / ___||  \/  | __ )    | __ )|  _ \| | | |_   _| ____|
 {CYAN}  \___ \| |\/| |  _ \    |  _ \| |_) | | | | | | |  _|
 {CYAN}   ___) | |  | | |_) |   | |_) |  _ <| |_| | | | | |___
-{CYAN}  |____/|_|  |_|____/    |____/|_| \_\\____/  |_| |_____|
+{CYAN}  |____/|_|  |_|____/    |____/|_| \_\\____/ |_| |_____|
 {MAGENTA}
-{MAGENTA}         ──  S M B   S H A R E   B R U T E F O R C E R  ──
-{WHITE}               v2.0  |  Aldayr Ruiz (xSmaky) |  2026
+{MAGENTA}   ──  S M B   S H A R E   B R U T E F O R C E R  ──
+{WHITE}         v2.0  |  Aldayr Ruiz (xSmaky) |  2026
 {RESET}
 """
 

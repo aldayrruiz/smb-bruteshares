@@ -249,3 +249,9 @@ build-iPhoneSimulator/
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python,ruby
+
+### Docker ###
+# Local output directory when using Docker volume mounts
+output/
+# Docker build cache (BuildKit)
+.dockerignore

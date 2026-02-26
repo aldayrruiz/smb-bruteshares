@@ -5,6 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
 [![Metasploit](https://img.shields.io/badge/Metasploit-Module-red.svg)](https://www.metasploit.com/)
+[![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)](Dockerfile)
 
 ---
 
@@ -32,6 +33,7 @@ The project ships two files serving different purposes:
 - 🖼️ ASCII banner (suppressed with `--no-banner`)
 - 🔇 Verbose mode to show raw `smbclient` commands
 - 🧩 Metasploit module with loot storage and multi-host scanning
+- 🐳 Docker support — run with zero local setup required
 
 ---
 
@@ -60,6 +62,14 @@ pip install -r requirements.txt
 | Metasploit Framework | Full installation required |
 | `ruby_smb` gem | Bundled with Metasploit |
 
+### Docker
+
+| Dependency | Notes |
+|---|---|
+| Docker ≥ 20.10 | Engine or Docker Desktop |
+
+No other local dependencies needed — `smbclient` and `colorama` are installed inside the image.
+
 ---
 
 ## ⚙️ Installation
@@ -67,10 +77,18 @@ pip install -r requirements.txt
 ### Python script
 
 ```bash
-git clone https://github.com/xSmaky/smb-bruteshares.git
+git clone https://github.com/aldayrruiz/smb-bruteshares.git
 cd smb-bruteshares
 pip install -r requirements.txt
 python3 smb_bruteshares.py --help
+```
+
+### Docker
+
+```bash
+git clone https://github.com/aldayrruiz/smb-bruteshares.git
+cd smb-bruteshares
+docker build -t smb-bruteshares .
 ```
 
 ### Metasploit module
@@ -115,6 +133,33 @@ python3 smb_bruteshares.py -t 192.168.1.10 -w wordlists/shares.txt \
 # Verbose mode
 python3 smb_bruteshares.py -t 192.168.1.10 -w wordlists/shares.txt -a -v
 ```
+
+### Docker
+
+Wordlists on the host are mounted with `-v`. Results can also be saved inside the container and copied out, or piped to a host path.
+
+```bash
+# Anonymous session (wordlist on host)
+docker run --rm \
+  -v /path/to/wordlists:/wordlists \
+  smb-bruteshares \
+  -t 192.168.1.10 -w /wordlists/shares.txt -a
+
+# Authenticated with domain, save results to host
+docker run --rm \
+  -v /path/to/wordlists:/wordlists \
+  -v $(pwd)/output:/output \
+  smb-bruteshares \
+  -t 192.168.1.10 -w /wordlists/shares.txt \
+  -u Administrator -p 'P@ssw0rd' -d corp.local \
+  -o /output/results.txt
+
+# Show help
+docker run --rm smb-bruteshares
+```
+
+> **Note:** Because Docker networking is host-agnostic, make sure the container can reach the target.
+> On Linux you can add `--network host` to use the host's network stack directly.
 
 ### Metasploit module
 
